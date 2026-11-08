@@ -14,19 +14,19 @@ export default function Navbar({ onNewReading, hasReport }: NavbarProps) {
       <div className="navbar-inner">
         <div className="navbar-brand" onClick={onNewReading} role="button" tabIndex={0}>
           <div className="brand-logo-icon">
-            <Compass size={22} className="text-amber-400 animate-spin-slow" />
+            <Compass size={22} color="#b45309" className="animate-spin-slow" />
           </div>
           <div className="brand-text-block">
             <span className="brand-title">AURA NUMERO</span>
-            <span className="brand-tagline">Vedic & Lo Shu Science</span>
+            {/* <span className="brand-tagline">Vedic & Lo Shu Science</span> */}
           </div>
         </div>
 
         <div className="navbar-right-actions">
-          <div className="brand-status-badge">
+          {/* <div className="brand-status-badge">
             <Sparkles size={13} className="text-amber-300" />
             <span>Cosmic Engine Ready</span>
-          </div>
+          </div> */}
 
           {hasReport && (
             <button type="button" onClick={onNewReading} className="nav-new-btn">

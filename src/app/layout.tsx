@@ -16,12 +16,12 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#060813",
+  themeColor: "#faf8f5",
 };
 
 export const metadata: Metadata = {
   title: "Aura Numerology - Sacred Mulank, Bhagyank, Namank & Lo Shu Grid",
-  description: "Calculate your Mulank, Bhagyank, Namank, Kuva number, and discover your 3x3 Lo Shu Magic Square chart.",
+  description: "Calculate your Mulank, Bhagyank, Namank, Ku a number, and discover your 3x3 Lo Shu Magic Square chart.",
 };
 
 export default function RootLayout({

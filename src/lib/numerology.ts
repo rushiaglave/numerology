@@ -280,49 +280,53 @@ export function calculateNamank(name: string): CoreNumberResult {
 
 /**
  * 4. Kuva / Kua Number (Feng Shui & Vedic Energy Number)
- * Standard Kua formula:
- * Based on solar birth year sum reduced to single digit:
- * Male (born before 2000): 10 - sum (if 2000+: 9 - sum)
- * Female (born before 2000): sum + 5 (if 2000+: sum + 6)
- * Reduced to single digit. Note: 5 converts to 2 (Male) or 8 (Female).
+ * Calculation logic:
+ * 1. Sum all 4 digits of birth year, reduced to single digit (1 - 9).
+ * 2. For 1900 - 1999:
+ *    - Male: 11 - reducedSum
+ *    - Female: reducedSum + 4
+ * 3. For 2000 onwards:
+ *    - Male: 10 - reducedSum
+ *    - Female: reducedSum + 5
+ * 4. Reduced to single digit (1 - 9).
  */
 export function calculateKua(year: number, gender: 'male' | 'female' | 'other'): CoreNumberResult {
-  const yearSum = reduceToSingleDigit(year);
+  const allDigitsSum = Math.abs(year)
+    .toString()
+    .split("")
+    .reduce((sum, digit) => sum + Number(digit), 0);
+
+  const yearSumReduced = reduceToSingleDigit(allDigitsSum);
   let rawKua = 0;
   let formulaExplanation = "";
 
-  if (gender === 'female') {
-    if (year >= 2000) {
-      rawKua = yearSum + 6;
-      formulaExplanation = `Year sum (${yearSum}) + 6 = ${rawKua}`;
+  if (year >= 1900 && year < 2000) {
+    // 1900 - 1999: Male minus with 11, Female plus 4
+    if (gender === 'female') {
+      rawKua = yearSumReduced + 4;
+      formulaExplanation = `1900-1999 Female: (Year sum ${yearSumReduced}) + 4 = ${rawKua}`;
     } else {
-      rawKua = yearSum + 5;
-      formulaExplanation = `Year sum (${yearSum}) + 5 = ${rawKua}`;
+      // Male / Other
+      rawKua = 11 - yearSumReduced;
+      formulaExplanation = `1900-1999 Male: 11 - (Year sum ${yearSumReduced}) = ${rawKua}`;
     }
   } else {
-    // Default Male / other
-    if (year >= 2000) {
-      rawKua = 9 - yearSum;
-      if (rawKua <= 0) rawKua += 9;
-      formulaExplanation = `9 - Year sum (${yearSum}) = ${rawKua}`;
+    // 2000 onwards: Male minus 10, Female plus 5
+    if (gender === 'female') {
+      rawKua = yearSumReduced + 5;
+      formulaExplanation = `2000+ Female: (Year sum ${yearSumReduced}) + 5 = ${rawKua}`;
     } else {
-      rawKua = 10 - yearSum;
-      formulaExplanation = `10 - Year sum (${yearSum}) = ${rawKua}`;
+      // Male / Other
+      rawKua = 10 - yearSumReduced;
+      if (rawKua <= 0) rawKua += 9;
+      formulaExplanation = `2000+ Male: 10 - (Year sum ${yearSumReduced}) = ${rawKua}`;
     }
   }
 
   let finalKua = reduceToSingleDigit(rawKua);
-  
-  // Traditional rule: 5 is Earth center; males convert to 2, females to 8
-  if (finalKua === 5) {
-    if (gender === 'female') {
-      finalKua = 8;
-      formulaExplanation += ` -> (5 transforms to 8 for Female)`;
-    } else {
-      finalKua = 2;
-      formulaExplanation += ` -> (5 transforms to 2 for Male)`;
-    }
-  }
+  if (finalKua === 0) finalKua = 9;
+
+  formulaExplanation += ` -> Final Kua: ${finalKua}`;
 
   const info = NUMBER_TRAITS[finalKua] || NUMBER_TRAITS[1];
 

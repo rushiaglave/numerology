@@ -5,6 +5,7 @@ import { NumerologyReportData } from '@/lib/numerology';
 import ReportHeader from './ReportHeader';
 import CoreNumberCard from './CoreNumberCard';
 import LoShuGridCard from './LoShuGridCard';
+import MulankBhagyankCompatibility from './MulankBhagyankCompatibility';
 import { Code2, Sparkles, Compass } from 'lucide-react';
 
 interface ReportViewProps {
@@ -26,7 +27,7 @@ export default function ReportView({ report, onReset }: ReportViewProps) {
         onReset={onReset}
       />
 
-      {/* 2. Below show Mulank, Namank, Bhagyank, Kuva */}
+      {/* 2. Below show Mulank, Namank, Bhagyank, Kua */}
       <div className="core-numbers-section">
         <div className="section-title-wrapper">
           <div className="section-eyebrow">
@@ -54,12 +55,18 @@ export default function ReportView({ report, onReset }: ReportViewProps) {
         </div>
       </div>
 
+      {/* 4. Mulank-Bhagyank Compatibility Reading */}
+      <MulankBhagyankCompatibility
+        mulank={report.mulank.number}
+        bhagyank={report.bhagyank.number}
+      />
       {/* 3. Lo Shu Grid */}
       <LoShuGridCard
         cells={report.loShuGrid.cells}
         planes={report.loShuGrid.planes}
         allBirthDigits={report.loShuGrid.allBirthDigits}
       />
+
 
       {/* Calculation Logic Ready Banner */}
       {/* <div className="logic-ready-box">

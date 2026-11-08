@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { Sparkles, Calendar, User, Compass, ArrowRight, ShieldCheck, Stars } from 'lucide-react';
 
 interface InputHeroProps {
-  onGenerate: (name: string, dob: string, gender: 'male' | 'female' | 'other') => void;
+  onGenerate: (name: string, dob: string, gender: 'male' | 'female') => void;
 }
 
 export default function InputHero({ onGenerate }: InputHeroProps) {
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
-  const [gender, setGender] = useState<'male' | 'female' | 'other'>('male');
+  const [gender, setGender] = useState<'male' | 'female'>('male');
   const [error, setError] = useState<string | null>(null);
   const [maxDate, setMaxDate] = useState<string>('');
 
@@ -44,10 +44,10 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
       <div className="hero-glow-circle hero-glow-1" />
       <div className="hero-glow-circle hero-glow-2" />
 
-      <div className="hero-badge">
+      {/* <div className="hero-badge">
         <Sparkles size={14} className="text-amber-400" />
         <span>Vedic & Lo Shu Numerology Portal</span>
-      </div>
+      </div> */}
 
       <h1 className="hero-title">
         Decode Your Cosmic Blueprint With <span className="gold-text-gradient">Sacred Numerology</span>
@@ -55,7 +55,7 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
 
       <p className="hero-subtitle">
         Discover your <strong>Mulank</strong> (Psychic Number), <strong>Bhagyank</strong> (Destiny Number),
-        <strong> Namank</strong> (Name Vibration), <strong>Kuva Number</strong>, and the ancient 3x3
+        <strong> Namank</strong> (Name Vibration), <strong>Kua Number</strong>, and the ancient 3x3
         <strong> Lo Shu Magic Grid</strong>.
       </p>
 
@@ -105,7 +105,7 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
           <div className="form-group">
             <label className="form-label">
               <Compass size={15} />
-              <span>Gender (Used for Kuva / Kua Number)</span>
+              <span>Gender (Used for Kua Number)</span>
             </label>
             <div className="gender-selector">
               <label className={`gender-option ${gender === 'male' ? 'gender-active' : ''}`}>
@@ -132,7 +132,7 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
                 <span>Female</span>
               </label>
 
-              <label className={`gender-option ${gender === 'other' ? 'gender-active' : ''}`}>
+              {/* <label className={`gender-option ${gender === 'other' ? 'gender-active' : ''}`}>
                 <input
                   type="radio"
                   name="gender"
@@ -142,7 +142,7 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
                   className="sr-only"
                 />
                 <span>Other</span>
-              </label>
+              </label> */}
             </div>
           </div>
 
@@ -154,7 +154,7 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
         </form>
 
         {/* Quick Demo Presets */}
-        <div className="sample-profiles-box">
+        {/* <div className="sample-profiles-box">
           <div className="sample-label">
             <ShieldCheck size={14} /> Quick Demo Profiles (1-Click Test):
           </div>
@@ -181,7 +181,7 @@ export default function InputHero({ onGenerate }: InputHeroProps) {
               Dr. APJ Abdul Kalam (15 Oct 1931)
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -59,12 +59,12 @@ export default function ReportHeader({
 
       <div className="banner-main-content">
         <div className="user-avatar-badge">
-          <User size={36} className="text-amber-400" />
+          <User size={36} color="#b45309" />
         </div>
 
         <div className="user-meta-details">
           <div className="cosmic-eyebrow">
-            <Sparkles size={14} /> Sacred Numerology Reading
+            <Sparkles size={14} color="#b45309" /> Sacred Numerology Reading
           </div>
           <h1 className="user-name-heading">{userName}</h1>
 
